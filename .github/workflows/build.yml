@@ -7,7 +7,7 @@ on:
 jobs:
   build:   
     runs-on: ubuntu-latest
-    container: node:22:alpine
+    container: node:22-alpine
 
     steps:
       - uses: actions/checkout@v2
