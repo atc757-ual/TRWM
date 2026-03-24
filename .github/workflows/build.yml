@@ -16,6 +16,7 @@ jobs:
 
       - name: Permitir carpeta como 'safe.directory'
         run: git config --global --add safe.directory "${{ github.workspace }}"
+
       - name: Instalar dependencias
         run: npm ci
 
