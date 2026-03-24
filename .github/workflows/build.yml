@@ -5,22 +5,25 @@ on:
     branches: [master]
   workflow_dispatch:
 jobs:
-  build:   
+  build:
     runs-on: ubuntu-latest
     container: node:22-alpine
 
     steps:
-      - name: Install git 
-        run:  apk add --no-cache git
-      - uses: actions/checkout@v2
-      - name: Git Workaround
+      - name: Instalar git
+        run: apk add --no-cache git
+
+      - name: Permitir carpeta como 'safe.directory'
         run: git config --global --add safe.directory "${{ github.workspace }}"
-      - name: Install dependencies
-        run: |
-          npm ci
-      - name: Run test
-        run: |
-          npm test
+
+      - uses: actions/checkout@v2
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar tests
+        run: npm test
+
       - name: test report
         uses: dorny/test-reporter@v3
         if: ${{!cancelled()}}
