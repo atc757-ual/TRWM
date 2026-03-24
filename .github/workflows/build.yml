@@ -9,21 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     container: node:22-alpine
     steps:
-      - name: Instalar git
+      - name: Install git
         run: apk add --no-cache git
 
       - uses: actions/checkout@v2
 
-      - name: Permitir carpeta como 'safe.directory'
-        run: git config --global --add safe.directory "${{ github.workspace }}"
+      - name: Allow folder as 'safe.directory'
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Install dependencies
+        run:  |
+          npm ci
 
-      - name: Ejecutar tests
-        run: npm test
+      - name: Run tests
+        run:  |
+          npm test
 
-      - name: test report
+      - name: Test report
         uses: dorny/test-reporter@v3
         if: ${{!cancelled()}}
         with:
