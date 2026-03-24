@@ -1,0 +1,19 @@
+name: TRWM CI
+on:
+  push:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+jobs:
+  build:   
+    runs-on: ubuntu-latest
+    container: node:22:alpine
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+            npm ci
+      - name: Run test
+        run: |
+          npm test
