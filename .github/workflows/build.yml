@@ -8,16 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: node:22-alpine
-
     steps:
       - name: Instalar git
         run: apk add --no-cache git
 
-      - name: Permitir carpeta como 'safe.directory'
-        run: git config --global --add safe.directory "${{ github.workspace }}"
-
       - uses: actions/checkout@v2
 
+      - name: Permitir carpeta como 'safe.directory'
+        run: git config --global --add safe.directory "${{ github.workspace }}"
       - name: Instalar dependencias
         run: npm ci
 
