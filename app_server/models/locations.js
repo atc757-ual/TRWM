@@ -29,6 +29,7 @@ const locationSchema = new mongoose.Schema({
     reviews: [reviewSchema]
 });
 
+module.exports = mongoose.model('Location', locationSchema);
 
 /*const homeList = (req,res) => {
     res.render('locations-list', {title: 'Loc8r - find a place to work with wifi',

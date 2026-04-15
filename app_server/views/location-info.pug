@@ -1,34 +1,32 @@
 extends layout
+include sharedHTMLfunctions
 
 block content
   .row.banner 
     .col-12
-      h1 StarCups 
+      h1 #{location.name} 
   .row
     .col-12.col-lg-9
       .row
         .col-12.col-md-6
-          p.rating 
-            i.fas.fa-star 
-            i.fas.fa-star 
-            i.fas.fa-star
-            i.far.fa-star 
-            i.far.fa-star
-          p.address 123 High Street, Reading, RG6 1PS
+          p 
+            +starRating(location.rating)
+          p.address #{location.address}
           .card.card-primary.mb-3 
             .card-body 
-              h2.card-title Openings hours 
-              p.card-text Monday - Friday: 7:00am - 7:00pm
-              p.card-text Saturday: 8:00am - 5:00pm
-              p.card-text Sunday: closed
+              h2.card-title Openings hours
+              for opening in location.openingTimes
+                if opening.closed
+                  p.card-text #{opening.days}: closed
+                else
+                  p.card-text #{opening.days}: #{opening.opening} - #{opening.closing}
           .card.card-primary
             .card-body 
               h2.card-title Facilities 
-              span.badge.badge-warning Hot drinks
-              span.mr-1
-              span.badge.badge-warning Food
-              span.mr-1
-              span.badge.badge-warning Premium wifi
+              each facility in location.facilities
+                span.badge.badge-warning= facility
+                span.mr-1
+
         .col-12.col-md-6
           .card.card-primary 
             .card-body 
@@ -41,27 +39,14 @@ block content
                 div.col-6.col-md-6
                   h2.mb-2 Customer reviews 
                 div.col-6.col-md-6
-                    a.badge.badge-pill.badge-primary.float-right(href="/location-review-form") Add review 
-              div.bg-primary.text-white.p-2.mb-3
-                small &nbsp;
-                  i.fas.fa-star 
-                  i.fas.fa-star 
-                  i.fas.fa-star
-                  i.fas.fa-star 
-                  i.far.fa-star
-                  span.ml-2 Simon Holmes 16 february 2019
-              div 
-                p.ml-2 What a great place
-              div.bg-primary.text-white.p-2.mb-3
-                small &nbsp;
-                  i.fas.fa-star 
-                  i.far.fa-star 
-                  i.far.fa-star
-                  i.far.fa-star 
-                  i.far.fa-star
-                  span.ml-2 Antonio Becerra 14 february 2019
-              div 
-                p.ml-2 I don't like this place
+                  a.badge.badge-pill.badge-primary.float-right(href=`/location/${location._id}/review/new`) Add review 
+              for review in location.reviews
+                div.bg-primary.text-white.p-2.mb-3
+                  small &nbsp;
+                    +starRating(review.rating)
+                    span.ml-2 #{review.author} #{review.createdOn}
+                div 
+                  p.ml-2 #{review.reviewText}
     .col-12.col-lg-3
-      p Startcups is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.
+      p #{location.name} is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.
       p If you\'ve been and you like it - or if you don\'t -

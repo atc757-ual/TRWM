@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-
 /*const ctrlMain = require('../controllers/main');*/
-const ctrlLocations = require('../controllers/locations');
-const ctrlAbout = require('../controllers/others');
+const ctrlLocations = require('../../app_server/controllers/locations');
+const ctrlAbout = require('../../app_server/controllers/others');
+
+
 /* GET home page. */
 router.get('/', ctrlLocations.homeList);
-router.get('/location/', ctrlLocations.locationInfo);
-router.get('/location-review-form', ctrlLocations.addReview);
-
+router.get('/location/:locationid', ctrlLocations.locationInfo);
+router.get('/location/:locationid/review/new', ctrlLocations.addReviewForm);
+router.post('/location/:locationid/review/new', ctrlLocations.addReview);
 /*Others*/
 
 router.get('/about', ctrlAbout.about);

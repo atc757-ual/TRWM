@@ -6,13 +6,13 @@ block content
       h1 Review Start 
   .row
     .col-12.col-lg-9
-      form 
+      form(action=`/location/${locationid}/review/new`, method='POST')
         .form-group 
           label(for='name') Name 
-          input.form-control(type='text', id="name", placeholder='Name')
+          input.form-control(type='text', id="name", name="name", placeholder='Name')
         .form-group 
           label(for='rating') Rating 
-          select.form-control(id="rating")
+          select.form-control(id="rating", name="rating")
             option(value='5') 5
             option(value='4') 4
             option(value='3') 3
@@ -20,6 +20,6 @@ block content
             option(value='1') 1
         .form-group 
           label(for='review') Review 
-          textarea.form-control(rows='5', id="review", placeholder='Write your review here')
-        button.btn.btn-primary.mb-3(type='submit') Submit Review
+          textarea.form-control(rows='5', id="review", name="review", placeholder='Write your review here')
+          button.btn.btn-primary.mb-3(type='submit') Submit Review
         
