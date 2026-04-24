@@ -1,27 +1,18 @@
 
 const mongoose = require('mongoose');
-const { locationInfo } = require('../../app_server/controllers/locations');
 const Loc = mongoose.model('Location');
 
 const reviewsReadOne= async (req, res) => {
     try {
-        console.log('reviewsReadOne params:', req.params);
         const location = await Loc.findById(req.params.locationid).select("name reviews").exec();  
         if (!location) {
-            console.log('Location not found for id:', req.params.locationid);
             return res.status(404).json({ message: 'Location not found' });
         }
 
-        console.log('Location found:', location.name);
-        console.log('Review ids in location:', location.reviews.map((review) => review._id.toString()));
-
         const review = location.reviews.id(req.params.reviewid);
         if (!review) {
-            console.log('Review not found for id:', req.params.reviewid);
             return res.status(404).json({ message: 'Review not found', location: location.name });
         }
-
-        console.log('Review found:', review);
         res.status(200).json(review);
     }
     catch (err) {
@@ -32,16 +23,12 @@ const reviewsReadOne= async (req, res) => {
 
 const reviewsCreate = async (req, res) => {
     try {
-        console.log('reviewsCreate params:', req.params);
-        console.log('reviewsCreate body:', req.body);
         const location = await Loc.findById(req.params.locationid).select("name reviews").exec();
         if (!location) {
-            console.log('Location not found for review create:', req.params.locationid);
             return res.status(404).json({ message: 'Location not found' });
         }
         location.reviews.push(req.body);
         await location.save();
-        console.log('Created review:', location.reviews[location.reviews.length - 1]);
         res.status(201).json(location.reviews[location.reviews.length - 1]);
     }
     catch (err) {
@@ -112,7 +99,7 @@ const reviewsDeleteOne = async (req, res) => {
         if (!review) {
             return res.status(404).json({ message: 'Review not found' });
         }   
-        review.remove();
+        review.deleteOne();
         await location.save();
         res.status(204).json();
     }

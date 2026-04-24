@@ -44,9 +44,13 @@ block content
                 div.bg-primary.text-white.p-2.mb-3
                   small &nbsp;
                     +starRating(review.rating)
-                    span.ml-2 #{review.author} #{review.createdOn}
+                    span.ml-2 #{review.author} &nbsp; #{review.createdOn}
                 div 
                   p.ml-2 #{review.reviewText}
+                  .ml-2.mb-3
+                    a.btn.btn-sm.btn-outline-primary.mr-2(href=`/location/${location._id}/review/${review._id}/edit`) Edit
+                    form.d-inline(action=`/location/${location._id}/review/${review._id}/delete`, method='POST')
+                      button.btn.btn-sm.btn-outline-danger(type='submit' onclick="return confirm('¿Estás seguro de que quieres eliminar esta reseña?')") Delete
     .col-12.col-lg-3
       p #{location.name} is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.
       p If you\'ve been and you like it - or if you don\'t -

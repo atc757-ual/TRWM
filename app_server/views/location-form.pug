@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1= title
+  .row
+    .col-12.col-lg-9
+      form(action=formAction, method='POST')
+        .form-group
+          label(for='name') Name
+          input.form-control(type='text', id='name', name='name', placeholder='Location name', value=(location && location.name) || '')
+        .form-group
+          label(for='address') Address
+          input.form-control(type='text', id='address', name='address', placeholder='Address', value=(location && location.address) || '')
+        .form-group
+          label(for='distance') Distance
+          input.form-control(type='text', id='distance', name='distance', placeholder='100m', value=(location && location.distance) || '')
+        .form-group
+          label(for='facilities') Facilities
+          input.form-control(type='text', id='facilities', name='facilities', placeholder='wifi, coffee, sockets', value=(location && location.facilities && location.facilities.join(', ')) || '')
+        button.btn.btn-primary.mb-3(type='submit')= submitLabel || 'Save Location'
+        a.btn.btn-link.mb-3(href='/') Cancel

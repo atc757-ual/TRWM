@@ -4,18 +4,19 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css", integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N", crossorigin="anonymous")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.8/flatly/bootstrap.rtl.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.8/darkly/bootstrap.rtl.min.css')
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
     body
-      nav.navbar.fixed-top.navbar-expand-md.navbar-light 
-        a.navbar-brand(href='/') Loc8r
-        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')
-          span.navbar-toggler-icon
-        #navbarMain.navbar-collapse.collapse
-          ul.navbar-nav.mr-auto
-            li.nav-item
-              a.nav-link(href='/about') About
-      .container.content  
+      header 
+        nav.navbar.fixed-top.navbar-expand-sm.navbar-light.bg-light
+          a.navbar-brand(href='/') Loc8r
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')
+            span.navbar-toggler-icon
+          #navbarMain.navbar-collapse.collapse
+            ul.navbar-nav.mr-auto
+              li.nav-item
+                a.nav-link.pl-3(href='/about') About
+      .container.content.mt-5
         block content
         footer
           .row 
